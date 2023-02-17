@@ -5,7 +5,7 @@ randomise=document.getElementById("randomise");
 console.log(sorting_container);
 
 min_val=1;
-max_val=30;
+max_val=20;
 let array=[]
 for(let i=min_val;i<max_val;i++){
     array.push(0);
@@ -22,23 +22,41 @@ function random_generate(array,min_val,max_val){
 
 function render(array){
     for(let i=0;i<array.length;i++){
-        let bar=document.createElement("div");
-        bar.classList.add("bars");
-        bar.style.height=array[i]+'vh';
-        sorting_container.appendChild(bar);
+        let bars=document.createElement("div");
+        bars.classList.add("bars");
+        bars.style.height=array[i]+'vh';
+        
+        sorting_container.appendChild(bars);
     }
 }
+function sleep(ms){
+    return new Promise((resolve)=>setTimeout(resolve,ms));
+}
 
-function bubble_sort(array){
+async function bubble_sort(array){
+    let bars=document.getElementsByClassName("bars");
+    
     for(let i=0;i<array.length;i++){
-        for(let j=i;j<array.length;j++){
-            if(array[i]>array[j]){
-                let temp=array[i];
-                array[i]=array[j];
+        for(let j=0;j<(array.length);j++){
+            if(array[j+1]<array[j]){
+                let temp=array[j+1];
+                array[j+1]=array[j];
                 array[j]=temp;
+                
+                bars[j+1].style.height=array[j+1]+"vh"
+                bars[j+1].style.backgroundColor = "#00ff00"
+                bars[j].style.height=array[j]+"vh"
+                bars[j].style.backgroundColor = "#00ff00"
+
+                
+                await sleep(100);
+                bars[j+1].style.backgroundColor="#ffa500"
+                bars[j].style.backgroundColor="#ffa500"
             }
+            
         }
     }
+    console.log(array);
 
 }
 
@@ -57,9 +75,9 @@ function main_control_randomise(){
 }
 sort.addEventListener("click",main_control_sort);
 function main_control_sort(){
-    sorting_container.innerHTML=""; 
-    bubble_sort(array);
-    render(array)
+    
+    bubble_sort(array,sorting_container);
+    
 }
 
 
