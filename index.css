@@ -33,8 +33,9 @@
 
 .bars{
     width:10px;
-    height:2px;
+    max-height: 500px;
     background-color:#ffa500;
     padding: 1vh;
     margin: 1vh ;
+    border-bottom-right-radius: 10cm;
 }

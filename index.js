@@ -4,9 +4,10 @@ randomise=document.getElementById("randomise");
 
 console.log(sorting_container);
 
-min_val=1;
-max_val=20;
+let min_val=1;
+let max_val=30;
 let array=[]
+let speed=100;
 for(let i=min_val;i<max_val;i++){
     array.push(0);
 }   
@@ -24,7 +25,7 @@ function render(array){
     for(let i=0;i<array.length;i++){
         let bars=document.createElement("div");
         bars.classList.add("bars");
-        bars.style.height=array[i]+'vh';
+        bars.style.height=array[i]+'%';
         
         sorting_container.appendChild(bars);
     }
@@ -43,13 +44,13 @@ async function bubble_sort(array){
                 array[j+1]=array[j];
                 array[j]=temp;
                 
-                bars[j+1].style.height=array[j+1]+"vh"
+                bars[j+1].style.height=array[j+1]+"%"
                 bars[j+1].style.backgroundColor = "#00ff00"
-                bars[j].style.height=array[j]+"vh"
+                bars[j].style.height=array[j]+"%"
                 bars[j].style.backgroundColor = "#00ff00"
 
                 
-                await sleep(100);
+                await sleep(speed);
                 bars[j+1].style.backgroundColor="#ffa500"
                 bars[j].style.backgroundColor="#ffa500"
             }
